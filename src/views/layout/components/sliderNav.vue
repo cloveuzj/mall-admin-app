@@ -18,7 +18,7 @@
         欢迎 刘生杰
         <a-icon type="down" />
       </li>
-      <li>退出登录</li>
+      <li @click="hangleExit">退出登录</li>
     </ul>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default {
   methods: {
     toggleCollapsed() {
       this.$store.dispatch('collapsedChanged');
+    },
+    hangleExit() {
+      this.$router.push({ name: 'Login' });
     },
   },
 };
