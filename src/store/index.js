@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     collapsed: false, // 为false时表示不贴近
     user: getUser(),
+    menuList: [],
   },
   mutations: {
     collapsedChange(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
       };
       removeUser();
     },
+    setMenu(state, routes) {
+      state.menuList = routes;
+    },
   },
   actions: {
     collapsedChanged(context) {
@@ -36,6 +40,9 @@ export default new Vuex.Store({
     },
     removeUserInfo(context) {
       context.commit('removeUserInfo');
+    },
+    setMenu(context, routes) {
+      context.commit('setMenu', routes);
     },
   },
   modules: {
