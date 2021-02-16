@@ -15,7 +15,7 @@
     </div>
     <ul class="user-info">
       <li>
-        欢迎 刘生杰
+        欢迎  {{ user.username }}
         <a-icon type="down" />
       </li>
       <li @click="hangleExit">退出登录</li>
@@ -24,13 +24,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  computed: {
+    ...mapState(['user']),
+  },
   methods: {
     toggleCollapsed() {
       this.$store.dispatch('collapsedChanged');
     },
     hangleExit() {
       this.$router.push({ name: 'Login' });
+      this.$store.dispatch('removeUserInfo');
     },
   },
 };

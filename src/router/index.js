@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/layout/Home.vue';
+import store from '../store/index';
 
 Vue.use(VueRouter);
 
@@ -34,5 +35,14 @@ const router = new VueRouter({
   mode: 'history',
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/Login' && to.path !== '/Register') {
+    if (store.state.user.appkey) {
+      next();
+    } else {
+      next('/Login');
+    }
+  }
+  next();
+});
 export default router;

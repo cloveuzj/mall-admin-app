@@ -69,12 +69,14 @@
 
 <script>
 import api from '@/api/user';
+import { mapActions } from 'vuex';
 
 export default {
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'normal_login' });
   },
   methods: {
+    ...mapActions(['setUserInfo']),
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
@@ -82,6 +84,19 @@ export default {
         if (emailReg.test(values.email) && !err) {
           api.login(values).then((res) => {
             if (res.data.status === 'success') {
+              const {
+                appkey, username, email, role,
+              } = res.data.data;
+              const user = {
+                username,
+                appkey,
+                role,
+                email,
+              };
+              console.log(user);
+              // this.$store.dispatch('downstatused', username);
+              this.setUserInfo(user);
+              console.log(this.$store.state.user.username);
               this.$router.push({ name: 'Home' });
             }
           });
