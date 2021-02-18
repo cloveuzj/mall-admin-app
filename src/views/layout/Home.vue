@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <left-menu></left-menu>
+    <left-menu :key="key"></left-menu>
     <div :class="{ main: true, 'menu-unfold': $store.state.collapsed }">
       <slider-nav></slider-nav>
       <router-view></router-view>
@@ -15,12 +15,22 @@ import sliderNav from './components/sliderNav.vue';
 export default {
   data() {
     return {
-
+      key: '',
     };
+  },
+  mounted() {
+    console.log(new Date().getTime());
   },
   components: {
     leftMenu,
     sliderNav,
+  },
+  watch: {
+    $route: {
+      handler() {
+        this.key = new Date().getTime();
+      },
+    },
   },
 };
 </script>

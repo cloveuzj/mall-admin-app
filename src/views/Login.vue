@@ -12,7 +12,9 @@
             'email',
             {
               rules: [
-                { required: true, message: 'Please input your email!' },
+                { required: true,
+                pattern: /^[\w-]+@[\w.-]+.com$/,
+                message: 'Please input your correct email!' },
               ],
             },
           ]"
@@ -80,8 +82,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
-        const emailReg = /^[\w-]+@[\w.-]+.com$/;
-        if (emailReg.test(values.email) && !err) {
+        if (!err) {
           api.login(values).then((res) => {
             if (res.data.status === 'success') {
               const {

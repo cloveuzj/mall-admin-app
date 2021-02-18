@@ -9,6 +9,8 @@ export default new Vuex.Store({
     collapsed: false, // 为false时表示不贴近
     user: getUser(),
     menuList: [],
+    ProductList: [],
+    cateList: [],
   },
   mutations: {
     collapsedChange(state) {
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     setMenu(state, routes) {
       state.menuList = routes;
     },
+    getAllProductList(state, lists) {
+      state.ProductList = lists;
+    },
+    getCategory(state, cates) {
+      state.cateList = cates;
+    },
   },
   actions: {
     collapsedChanged(context) {
@@ -43,6 +51,12 @@ export default new Vuex.Store({
     },
     setMenu(context, routes) {
       context.commit('setMenu', routes);
+    },
+    getAllProductList(context, lists) {
+      context.commit('getAllProductList', lists);
+    },
+    getCategory(context, cates) {
+      context.commit('getCategory', cates);
     },
   },
   modules: {

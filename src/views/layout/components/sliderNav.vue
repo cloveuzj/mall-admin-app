@@ -9,13 +9,17 @@
     </a-button>
     <div class="breadcrumb">
       <a-breadcrumb>
-        <a-breadcrumb-item>首页</a-breadcrumb-item>
-        <a-breadcrumb-item><a href="">统计</a></a-breadcrumb-item>
+        <a-breadcrumb-item>{{
+          $route.matched[0].meta.title
+        }}</a-breadcrumb-item>
+        <a-breadcrumb-item
+          >{{ $route.matched[1].meta.title }}
+        </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <ul class="user-info">
       <li>
-        欢迎  {{ user.username }}
+        欢迎 {{ user.username }}
         <a-icon type="down" />
       </li>
       <li @click="hangleExit">退出登录</li>

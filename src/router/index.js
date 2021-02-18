@@ -12,6 +12,7 @@ const asyncRoutes = [
     component: Home,
     meta: {
       title: '商品',
+      icon: 'appstore',
     },
     children: [
       {
@@ -31,6 +32,15 @@ const asyncRoutes = [
         },
       },
       {
+        path: 'productedit',
+        name: 'productEdit',
+        meta: {
+          title: '商品编辑',
+          hidden: true,
+        },
+        component: () => import('../views/page/productAdd.vue'),
+      },
+      {
         path: 'catagoy',
         name: 'Catagoy',
         meta: {
@@ -46,8 +56,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    redirect: '/index',
     meta: {
       title: '首页',
+      icon: 'home',
     },
     children: [
       {
@@ -78,13 +90,13 @@ const routes = [
   },
 ];
 // 菜单栏权限配置
-const filterRoutes = getMenu(store.state.user.role, asyncRoutes);
+const role = store.state.user.role || 'coustomer';
+const filterRoutes = getMenu(role, asyncRoutes);
 for (let i = 0; i < filterRoutes.length; i += 1) {
   routes.push(filterRoutes[i]);
 }
 const loginFilter = routes.filter((item) => item.meta.hidden !== true);
 store.dispatch('setMenu', loginFilter);
-
 const router = new VueRouter({
   mode: 'history',
   routes,
