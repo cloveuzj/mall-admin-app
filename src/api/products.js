@@ -7,4 +7,13 @@ export default {
   remove(id, params) {
     return axios.delete(`products/${id}`, { params });
   },
+  add(params) {
+    return axios.post('/products/add', params);
+  },
+  detail(id, params) {
+    return axios.get(`/products/${id}`, { params });
+  },
+  edit(params) {
+    return axios.put('/products/edit', params);
+  },
 };

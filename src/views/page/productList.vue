@@ -56,8 +56,9 @@ export default {
       });
     },
     edit(record) {
-      console.log(record);
-      this.$router.push({ name: 'productEdit' });
+      console.log(record.id);
+      // console.log(record);
+      this.$router.push({ name: 'productEdit', params: { id: record.id } });
     },
   },
 };
